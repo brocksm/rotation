@@ -3,12 +3,9 @@ function toQuaternion([x, y, z]) {
     y *= Math.PI / 360,
     z *= Math.PI / 360;
     	
-    var	sX = Math.sin(x), 
-    	cX = Math.cos(x),
-    	sY = Math.sin(y), 
-    	cY = Math.cos(y),
-    	sZ = Math.sin(z), 
-    	cZ = Math.cos(z);
+    var	sX = Math.sin(x), cX = Math.cos(x),
+    	sY = Math.sin(y), cY = Math.cos(y),
+    	sZ = Math.sin(z), cZ = Math.cos(z);
     	
     return [
 	cX * cY * cZ + sX * sY * sZ,
@@ -26,8 +23,8 @@ function toDegrees([a, b, c, d]) {
     ];
 }
   
-function slerp(q0, q1, t) {
-    var α = t ? t : 1;
+function slerp(q0, q1, _t) {
+    var t = _t ? _t : 1;
 	
     var d = dot(q0, q1);
 	
@@ -38,21 +35,21 @@ function slerp(q0, q1, t) {
     if (d > 0.9995) {
 	q1.map((v, i) => {v -= q0[i];})
 		
-	var vα = [
-		q0[0] + q1[0] * α,
-		q0[1] + q1[1] * α,
-		q0[2] + q1[2] * α,
-		q0[3] + q1[3] * α
+	var vt = [
+		q0[0] + q1[0] * t,
+		q0[1] + q1[1] * t,
+		q0[2] + q1[2] * t,
+		q0[3] + q1[3] * t
 	],
 		
-	f = Math.hypot(vα);
+	f = Math.hypot(vt);
 		
-	vα = va.map(v => v / f);
+	vt = vt.map(v => v / f);
 		
-	return vα;
+	return vt;
     }
 	
-    var θ_ = Math.acos(Math.max(-1, Math.min(1, d)));
+    var a = Math.acos(Math.max(-1, Math.min(1, d)));
 	
     q1.map((v, i) => {v -= q0[i] * d;});
 	
@@ -60,9 +57,9 @@ function slerp(q0, q1, t) {
 	
     q1.map(v => v / p);
 	
-    var θ = θ_ * α,
-	s = Math.sin(θ);
-	c = Math.cos(θ);
+    var at = a * t,
+	s = Math.sin(at),
+	c = Math.cos(at);
 		
     return [
 	q0[0] * c + q1[0] * s,
