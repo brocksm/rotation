@@ -1,5 +1,5 @@
 function toQuaternion([x, y, z]) {
-	var x *= Math.PI / 360,
+    var x *= Math.PI / 360,
     	y *= Math.PI / 360,
     	z *= Math.PI / 360;
     	
@@ -10,7 +10,7 @@ function toQuaternion([x, y, z]) {
     	sZ = Math.sin(z), 
     	cZ = Math.cos(z);
     	
-	return [
+    return [
 		cX * cY * cZ + sX * sY * sZ,
 		sX * cY * cZ - cX * sY * sZ,
 		cX * sY * cZ + sX * cY * sZ,
@@ -19,7 +19,7 @@ function toQuaternion([x, y, z]) {
   }
   
 function toDegrees([a, b, c, d]) {
-	return [
+    return [
 		Math.atan2(2 * (a * b + c * d), 1 - 2 * (b * b + c * c)) * 180 / Math.PI,
 		Math.asin(Math.max(-1, Math.min(1, 2 * (a * c - d * b)))) * 180 / Math.PI,
 		Math.atan2(2 * (a * d + b * c), 1 - 2 * (c * c + d * d)) * 180 / Math.PI
@@ -27,13 +27,13 @@ function toDegrees([a, b, c, d]) {
   }
   
 function slerp(q0, q1, t) {
-	var α = t ? t : 1;
+    var α = t ? t : 1;
 	
-	var d = dot(q0, q1);
+    var d = dot(q0, q1);
 	
-	if (d < 0) {q1.map(v => v *= -1;)}
+    if (d < 0) {q1.map(v => v *= -1;)}
 	
-	if (d > 0.9995) {
+    if (d > 0.9995) {
 		q1.map((v, i) => {v -= q0[i];})
 		
 		var vα = [
@@ -50,19 +50,19 @@ function slerp(q0, q1, t) {
 		return vα;
 	}
 	
-	var θ_ = Math.acos(Math.max(-1, Math.min(1, d)));
+    var θ_ = Math.acos(Math.max(-1, Math.min(1, d)));
 	
-	q1.map((v, i) => {v -= q0[i] * d;});
+    q1.map((v, i) => {v -= q0[i] * d;});
 	
-	var p = Math.hypot(q1);
+    var p = Math.hypot(q1);
 	
-	q1.map(v => v / p);
+    q1.map(v => v / p);
 	
-	var θ = θ_ * α,
+    var θ = θ_ * α,
 		s = Math.sin(θ);
 		c = Math.cos(θ);
 		
-	return [
+    return [
 		q0[0] * c + q1[0] * s,
 		q0[1] * c + q1[1] * s,
 		q0[2] * c + q1[2] * s,
@@ -71,17 +71,17 @@ function slerp(q0, q1, t) {
 }
   
 function dot(a, b) {
-	var x;
+    var x;
 	
-	for (var i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length; i++) {
 		x += a[i] * b[i];
 	}
 	
-	return x;
+    return x;
 }
 
 function quaternionProduct(q0, q1) {
-	return [
+    return [
 		q0[0] * q1[0] - q0[1] * q1[1] - q0[2] * q1[2] - q0[3] * q1[3],
     	q0[0] * q1[1] + q0[1] * q1[0] + q0[2] * q1[3] - q0[3] * q1[2],
     	q0[0] * q1[2] - q0[1] * q1[3] + q0[2] * q1[0] + q0[3] * q1[1],
