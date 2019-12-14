@@ -1,7 +1,7 @@
 function toQuaternion([x, y, z]) {
-    var x *= Math.PI / 360,
-    	y *= Math.PI / 360,
-    	z *= Math.PI / 360;
+    x *= Math.PI / 360,
+    y *= Math.PI / 360,
+    z *= Math.PI / 360;
     	
     var	sX = Math.sin(x), 
     	cX = Math.cos(x),
