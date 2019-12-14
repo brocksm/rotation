@@ -16,7 +16,7 @@ function toQuaternion([x, y, z]) {
 	cX * sY * cZ + sX * cY * sZ,
 	cX * cY * sZ - sX * sY * cZ
     ];
-  }
+}
   
 function toDegrees([a, b, c, d]) {
     return [
@@ -24,7 +24,7 @@ function toDegrees([a, b, c, d]) {
 	Math.asin(Math.max(-1, Math.min(1, 2 * (a * c - d * b)))) * 180 / Math.PI,
 	Math.atan2(2 * (a * d + b * c), 1 - 2 * (c * c + d * d)) * 180 / Math.PI
     ];
-  }
+}
   
 function slerp(q0, q1, t) {
     var α = t ? t : 1;
