@@ -1,29 +1,28 @@
- function toQuaternion([x, y, z]) {
-    var x *= Math.PI / 360,
+function toQuaternion([x, y, z]) {
+	var x *= Math.PI / 360,
     	y *= Math.PI / 360,
-    	z *= Math.PI / 360,
+    	z *= Math.PI / 360;
     	
-    	sX = Math.sin(x), 
+    var	sX = Math.sin(x), 
     	cX = Math.cos(x),
-    	
     	sY = Math.sin(y), 
     	cY = Math.cos(y),
     	sZ = Math.sin(z), 
-    	cg = Math.cos(z);
+    	cZ = Math.cos(z);
     	
-    return [
-      cX * cY * cZ + sX * sY * sZ,
-      sX * cY * cZ - cX * sY * sZ,
-      cX * sY * cZ + sX * cY * sZ,
-      cX * cY * sZ - sX * sY * cZ
+	return [
+		cX * cY * cZ + sX * sY * sZ,
+		sX * cY * cZ - cX * sY * sZ,
+		cX * sY * cZ + sX * cY * sZ,
+		cX * cY * sZ - sX * sY * cZ
     ];
   }
   
 function toDegrees([a, b, c, d]) {
 	return [
-      Math.atan2(2 * (a * b + c * d), 1 - 2 * (b * b + c * c)) * 180 / Math.PI,
-      Math.asin(Math.max(-1, Math.min(1, 2 * (a * c - d * b)))) * 180 / Math.PI,
-      Math.atan2(2 * (a * d + b * c), 1 - 2 * (c * c + d * d)) * 180 / Math.PI
+		Math.atan2(2 * (a * b + c * d), 1 - 2 * (b * b + c * c)) * 180 / Math.PI,
+		Math.asin(Math.max(-1, Math.min(1, 2 * (a * c - d * b)))) * 180 / Math.PI,
+		Math.atan2(2 * (a * d + b * c), 1 - 2 * (c * c + d * d)) * 180 / Math.PI
     ];
   }
   
@@ -82,9 +81,8 @@ function dot(a, b) {
 }
 
 function quaternionProduct(q0, q1) {
-	
 	return [
-    	q0[0] * q1[0] - q0[1] * q1[1] - q0[2] * q1[2] - q0[3] * q1[3],
+		q0[0] * q1[0] - q0[1] * q1[1] - q0[2] * q1[2] - q0[3] * q1[3],
     	q0[0] * q1[1] + q0[1] * q1[0] + q0[2] * q1[3] - q0[3] * q1[2],
     	q0[0] * q1[2] - q0[1] * q1[3] + q0[2] * q1[0] + q0[3] * q1[1],
     	q0[0] * q1[3] + q0[1] * q1[2] - q0[2] * q1[1] + q0[3] * q1[0]		
