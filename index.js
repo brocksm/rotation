@@ -24,38 +24,38 @@
     }
   
     function slerp(q0, q1, _t) {
-	var t = _t ? _t : 1;
+	var t = _t ? _t : 1,
 	
-	var d = dot(q0, q1);
+	    d = dot(q0, q1);
 	
 	if (d < 0) {
-	    q1.map(v => v *= -1);
+	    q1 = q1.map(v => v *= -1);
 	}
 	
 	if (d > 0.9995) {
-	    q1.map((v, i) => {v -= q0[i];})
+	    q1 = q1.map((v, i) => {v -= q0[i];})
 		
 	    var vt = [
 		q0[0] + q1[0] * t,
 		q0[1] + q1[1] * t,
 		q0[2] + q1[2] * t,
 		q0[3] + q1[3] * t
-	    ],
+	    ];
 		
-		f = Math.hypot(vt);
+	    var f = Math.hypot(vt);
 		
-		vt = vt.map(v => v / f);
+	    vt = vt.map(v => v / f);
 		
 	    return vt;
 	}
 	
-	var a = Math.acos(Math.max(-1, Math.min(1, d)));
+	var a = Math.acos(Math.max(-1, Math.min(1, d))),
 	
-	q1.map((v, i) => {v -= q0[i] * d;});
+	q1 = q1.map((v, i) => {v -= q0[i] * d;});
 	
 	var p = Math.hypot(q1);
 	
-	q1.map(v => v / p);
+	q1 = q1.map(v => v / p);
 	
 	var at = a * t,
 	    s = Math.sin(at),
