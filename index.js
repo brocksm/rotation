@@ -22,6 +22,14 @@ function toDegrees([a, b, c, d]) {
 	Math.atan2(2 * (a * d + b * c), 1 - 2 * (c * c + d * d)) * 180 / Math.PI
     ];
 }
+
+function toNvector([longitude, latitude, azithumal]) {
+    return [
+	Math.cos(latitude * Math.PI / 180) * Math.cos(longitude * Math.PI / 180),
+	Math.cos(latitude * Math.PI / 180) * Math.sin(longitude * Math.PI / 180),
+	Math.sin(latitude * Math.PI / 180)
+    ];
+}
   
 function slerp(q0, q1, _t) {
     var t = _t ? _t : 1,
@@ -68,9 +76,34 @@ function slerp(q0, q1, _t) {
 	q0[3] * c + q1[3] * s	
     ];
 }
+
+function geometricSlerp(v0, v1, _t) {
+    var t = _t ? _t : 1,
+        d = dot(v0, v1);
+	
+    var Ω = Math.acos(Math.max(-1, Math.min(1, d)));
+	
+    var p0 = Math.sin(Ω * (1 - t)),
+	p1 = Math.sin(Ω * t),
+	s = Math.sin(Ω);
+	
+    var x = v0[0] * p0 / s + v1[0] * p1 / s,
+	y = v0[1] * p0 / s + v1[1] * p1 / s,
+	z = v0[2] * p0 / s + v1[2] * p1 / s;
+	
+    return [
+	x, 
+	y, 
+	z
+    ]
+}
   
 function dot(q0, q1) {
-    return q0[0] * q1[0] + q0[1] * q1[1] + q0[2] * q1[2] + q0[3] * q1[3];
+    var sum = 0;
+    for (var i = 0; i < q0.length; i++) {
+	sum += q0[i] * q1[i];
+    }
+    return sum;
 }
 
 function product(q0, q1) {
