@@ -1,4 +1,4 @@
-function toQuaternion([x, y, z]) {
+function degreesToQuaternion([x, y, z]) {
     x *= Math.PI / 360,
     y *= Math.PI / 360,
     z *= Math.PI / 360;
@@ -15,7 +15,7 @@ function toQuaternion([x, y, z]) {
     ];
 }
   
-function toDegrees([a, b, c, d]) {
+function quaternionToDegrees([a, b, c, d]) {
     return [
 	Math.atan2(2 * (a * b + c * d), 1 - 2 * (b * b + c * c)) * 180 / Math.PI,
 	Math.asin(Math.max(-1, Math.min(1, 2 * (a * c - d * b)))) * 180 / Math.PI,
@@ -23,14 +23,21 @@ function toDegrees([a, b, c, d]) {
     ];
 }
 
-function toNvector([longitude, latitude, azithumal]) {
+function degreesToNvector([longitude, latitude, azithumal]) {
     return [
 	Math.cos(latitude * Math.PI / 180) * Math.cos(longitude * Math.PI / 180),
 	Math.cos(latitude * Math.PI / 180) * Math.sin(longitude * Math.PI / 180),
 	Math.sin(latitude * Math.PI / 180)
     ];
 }
-  
+
+function nVectorToDegrees([x, y, z]) {
+    return [
+	Math.atan2(z, Math.sqrt(Math.pow(x, 2), Math.pow(y, 2))) * 180 / Math.PI,
+	Math.atan2(y, x) * 180 / Math.PI
+    ];
+}
+
 function slerp(q0, q1, _t) {
     var t = _t ? _t : 1,
 	
