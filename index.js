@@ -33,7 +33,7 @@ function degreesToNvector([longitude, latitude, azithumal]) {
 
 function nVectorToDegrees([x, y, z]) {
     return [
-	Math.atan2(y, x) * 180 / Math.PI
+	Math.atan2(y, x) * 180 / Math.PI,
 	Math.atan2(z, Math.hypot(x, y)) * 180 / Math.PI
     ];
 }
