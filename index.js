@@ -104,13 +104,39 @@ function geometricSlerp(v0, v1, _t) {
 	z
     ]
 }
+
+function interpolate(v0, v1, _t) {
+    var t = _t ? _t : 1,
+        d = dot(v0, v1);
+	
+    var Ω = Math.acos(Math.max(-1, Math.min(1, d))) * t / 2,
+	s = sin(Ω),
+	c = cos(Ω),
+	x = cross(v0, v1),
+	f = Math.sqrt(dot(x, x));
+	
+    return [
+	c, 
+	x[2] / f * s,
+	-x[1] / f * s,
+	x[0] / f * s
+    ]
+}
   
-function dot(q0, q1) {
+function dot(v0, v1) {
     var sum = 0;
-    for (var i = 0; i < q0.length; i++) {
-	sum += q0[i] * q1[i];
+    for (var i = 0; i <= 2; i++) {
+	sum += v0[i] * v1[i];
     }
     return sum;
+}
+
+function cross(v0, v1) {
+    return [
+        v0[1] * v1[2] - v0[2] * v1[1],
+        v0[2] * v1[0] - v0[0] * v1[2],
+        v0[0] * v1[1] - v0[1] * v1[0]	
+    ]
 }
 
 function product(q0, q1) {
