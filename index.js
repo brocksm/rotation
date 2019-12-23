@@ -110,8 +110,8 @@ function interpolate(v0, v1, _t) {
         d = dot(v0, v1);
 	
     var Ω = Math.acos(Math.max(-1, Math.min(1, d))) * t / 2,
-	s = sin(Ω),
-	c = cos(Ω),
+	s = Math.sin(Ω),
+	c = Math.cos(Ω),
 	x = cross(v0, v1),
 	f = Math.sqrt(dot(x, x));
 	
