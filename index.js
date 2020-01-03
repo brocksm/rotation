@@ -113,13 +113,16 @@ function interpolate(v0, v1, _t) {
 	s = Math.sin(Ω),
 	c = Math.cos(Ω),
 	x = cross(v0, v1),
-	f = Math.sqrt(dot(x, x));
+	y = Math.sqrt(dot(x, x));
+	
+    // if undefined, return identity quaternion	
+    if (!y) return [1, 0, 0, 0];
 	
     return [
 	c, 
-	x[2] / f * s,
-	-x[1] / f * s,
-	x[0] / f * s
+	x[2] / y * s,
+	-x[1] / y * s,
+	x[0] / y * s
     ]
 }
   
