@@ -128,7 +128,7 @@ function interpolate(v0, v1, _t) {
   
 function dot(v0, v1) {
     var sum = 0;
-    for (var i = 0; i <= 2; i++) {
+    for (var i = 0; i < v0.length; i++) {
 	sum += v0[i] * v1[i];
     }
     return sum;
