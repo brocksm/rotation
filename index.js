@@ -15,11 +15,11 @@ function degreesToQuaternion([x, y, z]) {
     ];
 }
   
-function quaternionToDegrees([a, b, c, d]) {
+function quaternionToDegrees([q0, q1, q2, q3]) {
     return [
-	Math.atan2(2 * (a * b + c * d), 1 - 2 * (b * b + c * c)) * 180 / Math.PI,
-	Math.asin(Math.max(-1, Math.min(1, 2 * (a * c - d * b)))) * 180 / Math.PI,
-	Math.atan2(2 * (a * d + b * c), 1 - 2 * (c * c + d * d)) * 180 / Math.PI
+	Math.atan2(2 * (q0 * q1 + q2 * q3), 1 - 2 * (q1 * q1 + q2 * q2)) * 180 / Math.PI,
+	Math.asin(Math.max(-1, Math.min(1, 2 * (q0 * q2 - q3 * q1)))) * 180 / Math.PI,
+	Math.atan2(2 * (q0 * q3 + q1 * q2), 1 - 2 * (q2 * q2 + q3 * q3)) * 180 / Math.PI
     ];
 }
 
@@ -44,7 +44,8 @@ function slerp(q0, q1, _t) {
 	d = dot(q0, q1);
 	
     if (d < 0) {
-	q1 = q1.map(v => {return v *= -1;});
+	q1 = q1.map(v => {return v *= -1;}),
+	d = -d;
     }
 	
     if (d > 0.9995) {
