@@ -128,7 +128,7 @@ function interpolate(v0, v1, _t) {
 }
 
 function magnitude(v) {
-    return Math.sqrt(v[0] * v[1] * v[2]);	
+    return Math.sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);	
 }
 
 function dot(v0, v1) {
