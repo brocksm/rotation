@@ -155,3 +155,34 @@ function product(q0, q1) {
     	q0[0] * q1[3] + q0[1] * q1[2] - q0[2] * q1[1] + q0[3] * q1[0]		
     ]
 }
+
+// adapted from: https://github.com/chrisveness/geodesy/blob/master/latlon-nvector-spherical.js#L201
+function bearingTo(p0, p1) {
+    const v0 = degreesToNvector(p0.push(0));
+    const v1 = degreesToNvector(p1.push(0));
+    const N = degreesToNvector([0, 0, 1]); // n-vector representing north pole
+
+    const c1 = cross(v0, v1); // great circle through p1 & p2
+    const c2 = cross(v0, N);  // great circle through p1 & north pole
+
+    const θ = angleTo(c1, c2, v0); // bearing is (signed) angle between c1 & c2
+
+    return wrap360((θ*180/Math.PI)); // normalise to range 0..360°
+}
+
+// adapted from: https://github.com/chrisveness/geodesy/blob/master/vector3d.js#L179
+function angleTo(v0, v1, n=undefined) {
+    const sign = n==undefined || dot(cross(v0, v1), n) >= 0 ? 1 : -1;
+    const sinθ = magnitude(cross(v0, v1)) * sign;
+    const cosθ = dot(v0, v1);
+
+    return Math.atan2(sinθ, cosθ);
+}
+
+// adapted from: https://github.com/chrisveness/geodesy/blob/49a500cb8857e6c274b6449067464c1cd89686a8/dms.js#L330
+function wrap360(degrees) {
+    if (0 <= degrees && degrees < 360) return degrees;
+ 
+    const x = degrees, a = 180, p = 360;
+    return (((2*a*x/p)%p)+p)%p;
+}
