@@ -158,8 +158,11 @@ function product(q0, q1) {
 
 // adapted from: https://github.com/chrisveness/geodesy/blob/master/latlon-nvector-spherical.js#L201
 function bearingTo(p0, p1) {
-    const v0 = degreesToNvector(p0.push(0));
-    const v1 = degreesToNvector(p1.push(0));
+    if (p0.length = 2) p0.push(0);
+    if (p1.length = 2) p1.push(0);
+	
+    const v0 = degreesToNvector(p0);
+    const v1 = degreesToNvector(p1);
     const N = degreesToNvector([0, 0, 1]); // n-vector representing north pole
 
     const c1 = cross(v0, v1); // great circle through p1 & p2
