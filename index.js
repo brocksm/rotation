@@ -160,6 +160,7 @@ function product(q0, q1) {
 function bearingTo(p0, p1) {
     if (p0.length = 2) p0.push(0);
     if (p1.length = 2) p1.push(0);
+    console.log("p0: " + p0);
 	
     const v0 = degreesToNvector(p0);
     const v1 = degreesToNvector(p1);
