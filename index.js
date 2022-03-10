@@ -161,15 +161,17 @@ function bearingTo(p0, p1) {
     if (p0.length = 2) p0.push(0);
     if (p1.length = 2) p1.push(0);
     console.log("p0: " + p0);
-	
+    console.log("p1: "+ p1);	
     const v0 = degreesToNvector(p0);
     const v1 = degreesToNvector(p1);
     const N = degreesToNvector([0, 0, 1]); // n-vector representing north pole
 
     const c1 = cross(v0, v1); // great circle through p1 & p2
     const c2 = cross(v0, N);  // great circle through p1 & north pole
-
+    console.log("c1: " + c1);
+    console.log("c2: " + c2);
     const θ = angleTo(c1, c2, v0); // bearing is (signed) angle between c1 & c2
+    console.log("θ: " θ);	
 
     return wrap360((θ*180/Math.PI)); // normalise to range 0..360°
 }
