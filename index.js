@@ -164,7 +164,7 @@ function bearingTo(p0, p1) {
     console.log("p1: "+ p1);	
     const v0 = degreesToNvector(p0);
     const v1 = degreesToNvector(p1);
-    const N = degreesToNvector([0, 0, 1]); // n-vector representing north pole
+    const N = [0, 0, 1]; // n-vector representing north pole
 
     const c1 = cross(v0, v1); // great circle through p1 & p2
     const c2 = cross(v0, N);  // great circle through p1 & north pole
