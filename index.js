@@ -171,7 +171,7 @@ function bearingTo(p0, p1) {
     console.log("c1: " + c1);
     console.log("c2: " + c2);
     const θ = angleTo(c1, c2, v0); // bearing is (signed) angle between c1 & c2
-    console.log("θ: " θ);	
+    console.log("θ: " + θ);	
 
     return wrap360((θ*180/Math.PI)); // normalise to range 0..360°
 }
